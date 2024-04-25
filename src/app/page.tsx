@@ -1,6 +1,7 @@
-import Link from "next/link";
 import { db } from "~/server/db";
 
+//lets the browser know that the app is dynamic
+export const dynamic = 'force-dynamic';
 const mockUrls =[
   "https://utfs.io/f/146b3591-f1d3-48f1-9930-dbd06b9ac99b-1vx6r.jpg",
   "https://utfs.io/f/bfcea573-7558-4714-8a54-8a59e5ffa06c-1vx6q.jpeg",
