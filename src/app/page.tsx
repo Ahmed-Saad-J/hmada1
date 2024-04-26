@@ -1,16 +1,15 @@
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { db } from "~/server/db";
 
 //lets the browser know that the app is dynamic
 export const dynamic = 'force-dynamic';
 
-export default async function HomePage() {
-  const images = await db.query.images.findMany({
+async function Images(){
+    const images = await db.query.images.findMany({
     orderBy:(model,{desc})=>desc(model.id)
   });
-  console.log('post',images)
-  return (
-    <main className="">
-      <div className="flex flex-wrap gap-4">
+return(
+  <div className="flex flex-wrap gap-4">
         {images.map((image)=>(
           <div key={image.id} className="w-48 flex flex-col">
             <img src={image.url}/>
@@ -18,7 +17,20 @@ export default async function HomePage() {
           </div>
         ))}
       </div>
-      Hello (gellary in progress)
+)
+}
+
+export default async function HomePage() {
+
+  return (
+    <main className="">
+      <SignedOut>
+        <div className="w-full h-full text-2xl text-center">Please sign in to borwse the gellary</div>
+      </SignedOut>
+      <SignedIn>
+        <Images />
+      </SignedIn>
+      
     </main>
   );
 }
